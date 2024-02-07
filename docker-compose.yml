@@ -1,0 +1,52 @@
+version: "3"
+
+services:
+
+  cache:
+    image: redis:7.0.15-alpine
+    container_name: cache
+    restart: always
+    ports:
+      - "6379:6379"
+    environment:
+      - REDIS_PASSWORD=my-password
+      - REDIS_PORT=6379
+      - REDIS_DATABASES=16
+    networks:
+      - app-network
+
+
+  wordle:
+    container_name: wordle
+    build:
+      context: .
+    env_file: .env
+    ports:
+        - "8000:8000"
+    volumes:
+        - .:/app
+    restart: always
+    networks:
+      - app-network
+    depends_on:
+      - cache
+
+  statictis:
+    container_name: statictis
+    build:
+      context: .
+      dockerfile: Dockerfile_statistics
+    env_file: .env
+    ports:
+        - "9000:9000"
+    volumes:
+        - .:/app
+    restart: always
+    networks:
+      - app-network
+    depends_on:
+      - cache
+
+networks:
+  app-network:
+    driver: bridge
