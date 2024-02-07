@@ -30,4 +30,3 @@ def get_current_user(token: str = Depends(oauth2_scheme)):
         return payload
     except JWTError:
         raise credentials_exception
-
