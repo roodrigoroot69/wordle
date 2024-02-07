@@ -1,3 +1,4 @@
+import threading
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional
 
@@ -10,7 +11,7 @@ class WordlePlayProcessor:
     word_repository: IWordsRepository
     word: str
     user: Dict
-    validated_letters: Optional[List[Dict] ]= field(default_factory=list)
+    validated_letters: Optional[List[Dict]]= field(default_factory=list)
 
     def execute(self) -> List[Dict]:
         self._validate_length_user_world(self.word)
@@ -36,12 +37,6 @@ class WordlePlayProcessor:
             else:
                 self._save_punctuation(letter, 3)
 
-    def _save_punctuation(self, letter: str, value: int):
-        self.validated_letters.append({
-            "letter": letter,
-            "value": value
-        })
-
     def _is_the_same_letter(self, index: int, current_word):
         return self.word[index] == current_word[index]
 
@@ -52,3 +47,9 @@ class WordlePlayProcessor:
         total_score = (letters['value'] for letters in self.validated_letters)
         if total_score == 5:
             print("user wins")
+
+    def _save_punctuation(self, letter: str, value: int):
+        self.validated_letters.append({
+            "letter": letter,
+            "value": value
+        })

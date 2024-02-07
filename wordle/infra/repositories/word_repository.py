@@ -14,7 +14,6 @@ class PostgresWordRepository(IWordsRepository):
 
     def get_active_word(self):
         word = self.db.query(Words).filter(and_(func.length(Words.word) == 5, Words.is_active == True)).first()
-        #self.deactivate_word(word=word)
         return word
 
     def get_word(self, word):
