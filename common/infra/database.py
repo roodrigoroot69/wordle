@@ -6,7 +6,7 @@ from sqlalchemy.orm import sessionmaker
 Base = declarative_base()
 
 
-DATABASE_URL = "postgresql://jgtiztew:34lBlhTD5ups6oT1MBWFjYKWCQDPjEsk@baasu.db.elephantsql.com/jgtiztew"
+DATABASE_URL = "postgresql://rjbnuehw:Y1qArOnlvJp_ht_H8lBLbbcsMsCAQHI8@baasu.db.elephantsql.com/rjbnuehw"
 engine = create_engine(DATABASE_URL)
 Base.metadata.create_all(bind=engine)
 

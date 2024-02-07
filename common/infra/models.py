@@ -21,3 +21,13 @@ class Words(BaseModel):
     id = Column(Integer, primary_key=True)
     word = Column(String)
     is_active = Column(Boolean, default=True)
+
+
+
+class User(BaseModel):
+
+    __tablename__ = 'users'
+
+    id = Column(Integer, primary_key=True)
+    username = Column(String)
+    password = Column(String)
