@@ -5,7 +5,7 @@
 ## Overview:
 Creación de un API REST para jugar Wordle.
 Se trata de que el sistema va a escoger una palabra de 5 letras con un tiempo de vida de 5 minutos.
-El usuario podra intentar adivinar cual es la palbra con 5 intentos.
+El usuario podra intentar adivinar cual es la palabra con 5 intentos.
 
 ## Diagram
 
