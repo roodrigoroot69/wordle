@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends
+from common.infra.auth.token import get_current_user
 from sqlalchemy.orm import Session
 from fastapi.responses import JSONResponse
 
@@ -15,6 +16,7 @@ router = APIRouter()
 @router.get("/accurate_words/", status_code=200)
 def get_accurate_Words(
     db: Session = Depends(get_db),
+    current_user: dict = Depends(get_current_user),
 ):
     postgres_statictis_repository = PostgresStatictisRepository(db=db)
     accurate_words = AccurateWordsProcessor(
