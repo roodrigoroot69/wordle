@@ -10,3 +10,4 @@ pydantic
 schedule
 mamba
 redis
+expexcts
