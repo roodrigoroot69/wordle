@@ -7,6 +7,7 @@ from fastapi import HTTPException
 from wordle.app.wordle_play import WordlePlayProcessor
 from common.infra.models import User
 
+
 with describe(WordlePlayProcessor) as self:
 
     with before.all:
