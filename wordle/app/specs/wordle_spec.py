@@ -15,11 +15,13 @@ with describe(WordlePlayProcessor) as self:
         self.user_record.word = "verde"
         self.word_repository_mock = Mock()
         self.cache_repository_mock = Mock()
+        self.winner_repository_mock = Mock()
         self.use_case = WordlePlayProcessor(
             word_repository=self.word_repository_mock,
             word="cafes",
             cache_repository=self.cache_repository_mock,
             user={"username": "rodrigo"},
+            winner_repository=self.winner_repository_mock,
         )
 
     with context("when the user make their first attempt and guess a letter right"):
@@ -59,6 +61,7 @@ with describe(WordlePlayProcessor) as self:
                 word="atole",
                 cache_repository=self.cache_repository_mock,
                 user={"username": "rodrigo"},
+                winner_repository=self.winner_repository_mock,
             )
 
             result = use_case.execute()
@@ -88,6 +91,7 @@ with describe(WordlePlayProcessor) as self:
                 word_repository=self.word_repository_mock,
                 word="jamon",
                 cache_repository=self.cache_repository_mock,
+                winner_repository=self.winner_repository_mock,
                 user={"username": "rodrigo"},
             )
 
@@ -114,6 +118,7 @@ with describe(WordlePlayProcessor) as self:
             self.cache_repository_mock.get_attempt.return_value = 6
             use_case = WordlePlayProcessor(
                 word_repository=self.word_repository_mock,
+                winner_repository=self.winner_repository_mock,
                 word="jamon",
                 cache_repository=self.cache_repository_mock,
                 user={"username": "rodrigo"},
@@ -127,9 +132,48 @@ with describe(WordlePlayProcessor) as self:
             self.cache_repository_mock.get_attempt.return_value = 6
             use_case = WordlePlayProcessor(
                 word_repository=self.word_repository_mock,
+                winner_repository=self.winner_repository_mock,
                 word="venustiano",
                 cache_repository=self.cache_repository_mock,
                 user={"username": "rodrigo"},
             )
 
             expect(lambda: use_case.execute()).to(raise_error(HTTPException))
+
+
+    with context("when the user send the correct word"):
+        with it("should return all letters with 1 and save winner"):
+            self.word_repository_mock.get_active_word.return_value = self.user_record
+            self.cache_repository_mock.get_attempt.return_value = 1
+            use_case = WordlePlayProcessor(
+                word_repository=self.word_repository_mock,
+                word="verde",
+                cache_repository=self.cache_repository_mock,
+                winner_repository=self.winner_repository_mock,
+                user={"username": "rodrigo", 'user_id': 1},
+            )
+
+            result = use_case.execute()
+
+            expect(result).to(
+                equal(
+                    [
+                        {"letter": "v", "value": 1},
+                        {"letter": "e", "value": 1},
+                        {"letter": "r", "value": 1},
+                        {"letter": "d", "value": 1},
+                        {"letter": "e", "value": 1},
+                    ]
+                )
+            )
+            expect(self.cache_repository_mock.save_attempt.call_args).to(
+                equal(call("rodrigo", 2))
+            )
+            expect(self.winner_repository_mock.save_winner.call_args).to(
+                equal(
+                    call(
+                        user_id=1,
+                        word='verde'
+                    )
+                )
+            )
