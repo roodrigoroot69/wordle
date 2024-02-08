@@ -34,6 +34,8 @@ El usuario podra intentar adivinar cual es la palbra con 5 intentos.
 
 
 ## Documentation
+Para ver la documentación de las APIS click [aquí](https://github.com/roodrigoroot69/wordle/blob/main/docs/api_documentation.md).
+
 
 Postman:
 Download collection and import on your Postman
