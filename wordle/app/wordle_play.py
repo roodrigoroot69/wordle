@@ -5,21 +5,29 @@ from typing import Dict, List, Optional
 from fastapi import HTTPException
 
 from wordle.domain.repositories.word_interface import IWordsRepository
+from wordle.domain.repositories.cache_interface import ICacheRepository
+
+
+ATTEMPTS_ALLOWED = 6
+
 
 @dataclass
 class WordlePlayProcessor:
     word_repository: IWordsRepository
+    cache_repository: ICacheRepository
     word: str
     user: Dict
     validated_letters: Optional[List[Dict]]= field(default_factory=list)
 
     def execute(self) -> List[Dict]:
+        self._validate_attempts()
         self._validate_length_user_world(self.word)
 
         current_word = self.word_repository.get_active_word().word
 
         self._valdiate_each_letter(current_word)
-
+        current_attempts = self.cache_repository.get_attempt(self.user['username'])
+        self.cache_repository.save_attempt(self.user['username'], int(current_attempts) + 1)
         return self.validated_letters
 
     def _validate_length_user_world(self, word: str):
@@ -53,3 +61,9 @@ class WordlePlayProcessor:
             "letter": letter,
             "value": value
         })
+
+
+    def _validate_attempts(self):
+        attemps = self.cache_repository.get_attempt(self.user['username'])
+        if attemps and int(attemps) == ATTEMPTS_ALLOWED:
+            raise HTTPException(status_code=400, detail='Has alcanzado el límite de intentos permitidos.')
