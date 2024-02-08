@@ -6,6 +6,7 @@ from sqlalchemy.orm import Session
 from wordle.domain.repositories.winners_repository import IWinnersRepository
 from common.infra.models import Winners
 
+
 @dataclass
 class PostgresWinnerRepository(IWinnersRepository):
 
