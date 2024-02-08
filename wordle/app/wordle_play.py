@@ -6,6 +6,7 @@ from fastapi import HTTPException
 
 from wordle.domain.repositories.word_interface import IWordsRepository
 from wordle.domain.repositories.cache_interface import ICacheRepository
+from wordle.domain.repositories.winners_repository import IWinnersRepository
 
 
 ATTEMPTS_ALLOWED = 6
@@ -13,10 +14,11 @@ ATTEMPTS_ALLOWED = 6
 
 @dataclass
 class WordlePlayProcessor:
-    word_repository: IWordsRepository
-    cache_repository: ICacheRepository
     word: str
     user: Dict
+    word_repository: IWordsRepository
+    cache_repository: ICacheRepository
+    winner_repository: IWinnersRepository
     validated_letters: Optional[List[Dict]]= field(default_factory=list)
 
     def execute(self) -> List[Dict]:
@@ -28,6 +30,8 @@ class WordlePlayProcessor:
 
         current_attempts = self.cache_repository.get_attempt(self.user['username'])
         self.cache_repository.save_attempt(self.user['username'], int(current_attempts) + 1)
+
+        self._is_user_wins()
 
         return self.validated_letters
 
@@ -52,17 +56,19 @@ class WordlePlayProcessor:
     def _is_letter_inside_word(self, letter: str, word: str):
         return letter in word
 
-    def user_wins(self):
-        total_score = (letters['value'] for letters in self.validated_letters)
+    def _is_user_wins(self):
+        total_score = sum(letters['value'] for letters in self.validated_letters)
         if total_score == 5:
-            print("user wins")
+            self.winner_repository.save_winner(
+                user_id=self.user['user_id'],
+                word=self.word,
+            )
 
     def _save_punctuation(self, letter: str, value: int):
         self.validated_letters.append({
             "letter": letter,
             "value": value
         })
-
 
     def _validate_attempts(self):
         attemps = self.cache_repository.get_attempt(self.user['username'])
