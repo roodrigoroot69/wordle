@@ -19,7 +19,7 @@ def login(user_request: UserRequest, db: Session = Depends(get_db)):
     if not user or not pwd_context.verify(user_request.password, user.password):
         return None
     return create_jwt_token(
-        data=user_request.dict(), expires_minutes=30
+        data={'user_id': user.id, 'username': user.username}, expires_minutes=30
     )
 
 
