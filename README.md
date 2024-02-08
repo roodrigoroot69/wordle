@@ -15,9 +15,12 @@ El usuario podra intentar adivinar cual es la palabra con 5 intentos.
 - Login
 - Registrar Usuario
 - Wordle (Necesita autenticación y enviar el token en los headers)
-- Cambiar la palabra cada 5 minutos
-- Obtener las palabras más acertadas
+- Cambiar la palabra cada 5 minutos (Necesita autenticación)
+- Obtener las palabras más acertadas (Necesita autenticación)
+- Obtener a los Diez mejores jugadores con sus victorias (Necesita autenticación)
 
+## Casos de uso que no soporta
+- Obtener partidas que ha jugado un usuario y sus victorias
 
 ## Stack
 
@@ -38,6 +41,6 @@ El usuario podra intentar adivinar cual es la palabra con 5 intentos.
 Para ver la documentación de las APIS click [aquí](https://github.com/roodrigoroot69/wordle/blob/main/docs/api_documentation.md).
 
 
-Postman:
+**Postman**:
 Download collection and import on your Postman
 [Collection of Postman](https://drive.google.com/file/d/1Q4saIRLmZ2V8kc8JAurr8q3kE3siJ0SY/view?usp=sharing)
