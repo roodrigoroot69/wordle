@@ -13,9 +13,11 @@ with describe(WordlePlayProcessor) as self:
     with before.all:
         self.user_record = create_autospec(spec=User)
         self.user_record.word = "verde"
+
         self.word_repository_mock = Mock()
         self.cache_repository_mock = Mock()
         self.winner_repository_mock = Mock()
+
         self.use_case = WordlePlayProcessor(
             word_repository=self.word_repository_mock,
             word="cafes",

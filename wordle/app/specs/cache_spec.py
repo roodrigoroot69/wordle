@@ -11,8 +11,10 @@ with describe(RedisCacheRepository) as self:
     with before.all:
         self.ANY_KEY = "rodrigo"
         self.ANY_VALUE = "ANY_VALUE"
+
         self.redis_client_mock = Mock()
         self.redis_client_mock.get.return_value = 1
+
         self.redis_cache_repository = RedisCacheRepository(
             redis_client=self.redis_client_mock,
         )
