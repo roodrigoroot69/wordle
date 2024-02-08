@@ -14,7 +14,7 @@ class PostgresStatictisRepository(IStatictisRepository):
 
     def get_most_accurate_words(self):
         return (
-            self.db.query(Winners.word, func.count().label('repetition_count'))
+            self.db.query(Winners.word, func.count().label("repetition_count"))
             .group_by(Winners.word)
             .having(func.count() > 2)
             .order_by(func.count().desc())

@@ -6,4 +6,3 @@ from statictis.infra.rest.endpoints import router as statictis_router
 
 app = FastAPI()
 app.include_router(statictis_router)
-

@@ -3,6 +3,7 @@ from typing import List
 
 from statictis.domain.repositories.statictis_repository import IStatictisRepository
 
+
 @dataclass
 class AccurateWordsProcessor:
     statictis_repository: IStatictisRepository
