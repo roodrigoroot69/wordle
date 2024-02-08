@@ -48,5 +48,6 @@ Download collection and import on your Postman
 
 ## Usuarios disponibles para hacer pruebas:
 **Los usuarios son player1 sucesivamente hasta player25 y la contraseña es la misma para todos**
+
 **username**: player1...player25
 **password**: password123
