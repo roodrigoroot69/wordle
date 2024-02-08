@@ -44,3 +44,9 @@ Para ver la documentación de las APIS click [aquí](https://github.com/roodrigo
 **Postman**:
 Download collection and import on your Postman
 [Collection of Postman](https://drive.google.com/file/d/1Q4saIRLmZ2V8kc8JAurr8q3kE3siJ0SY/view?usp=sharing)
+
+
+## Usuarios disponibles para hacer pruebas:
+**Los usuarios son player1 sucesivamente hasta player25 y la contraseña es la misma para todos**
+**username**: player1...player25
+**password**: password123
