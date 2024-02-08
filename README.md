@@ -50,4 +50,5 @@ Download collection and import on your Postman
 **Los usuarios son player1 sucesivamente hasta player25 y la contraseña es la misma para todos**
 
 **username**: player1...player25
+
 **password**: password123
