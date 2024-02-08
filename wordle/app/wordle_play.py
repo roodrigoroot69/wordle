@@ -24,10 +24,11 @@ class WordlePlayProcessor:
         self._validate_length_user_world(self.word)
 
         current_word = self.word_repository.get_active_word().word
-
         self._valdiate_each_letter(current_word)
+
         current_attempts = self.cache_repository.get_attempt(self.user['username'])
         self.cache_repository.save_attempt(self.user['username'], int(current_attempts) + 1)
+
         return self.validated_letters
 
     def _validate_length_user_world(self, word: str):
