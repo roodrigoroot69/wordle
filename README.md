@@ -9,6 +9,8 @@ El usuario podra intentar adivinar cual es la palbra con 5 intentos.
 
 ## Diagram
 
+![Diagram](./docs/diagram.png)
+
 ## Use cases to support:
 - Login
 - Registrar Usuario
