@@ -5,7 +5,7 @@ import sys
 import os
 
 # Obtén la ruta del directorio common
-common_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+common_path = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.append(common_path)
 
 from common.infra.database import SessionLocal
@@ -18,14 +18,15 @@ batch_size = 5000  # Número de palabras a insertar por lote
 
 def save_word(word: str, words_batch: List):
     if word:
-        words_batch.append({'word': word})
+        words_batch.append({"word": word})
 
         if len(words_batch) >= batch_size:
             session.bulk_insert_mappings(Words, words_batch)
             session.commit()
             words_batch = []
 
-with open('words.txt', 'r', encoding='utf-8') as file:
+
+with open("words.txt", "r", encoding="utf-8") as file:
     words_batch = []
     for line in file:
         print(".", end="")

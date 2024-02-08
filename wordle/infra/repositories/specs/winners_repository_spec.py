@@ -5,10 +5,10 @@ from sqlalchemy.orm import Session
 from unittest.mock import Mock
 
 
-with describe('PostgresWinnerRepository'):
+with describe("PostgresWinnerRepository"):
 
-    with context('save_winner'):
-        with it('saves a winner'):
+    with context("save_winner"):
+        with it("saves a winner"):
             mock_db_session = Mock(spec=Session)
             repository = PostgresWinnerRepository(db=mock_db_session)
 
@@ -20,4 +20,3 @@ with describe('PostgresWinnerRepository'):
             expect(mock_db_session.add.called).to(be_true)
             expect(mock_db_session.commit.called).to(be_true)
             expect(mock_db_session.refresh.called).to(be_true)
-
