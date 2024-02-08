@@ -23,7 +23,6 @@ class Words(BaseModel):
     is_active = Column(Boolean, default=True)
 
 
-
 class User(BaseModel):
 
     __tablename__ = 'users'
@@ -31,3 +30,13 @@ class User(BaseModel):
     id = Column(Integer, primary_key=True)
     username = Column(String)
     password = Column(String)
+    winners = relationship('Winners', back_populates='user')
+
+class Winners(BaseModel):
+
+    __tablename__ = 'winners'
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('users.id'))
+    user = relationship('User', back_populates='winners')
+    word = Column(String)
