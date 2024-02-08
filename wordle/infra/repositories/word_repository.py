@@ -7,13 +7,25 @@ from sqlalchemy.orm import Session
 from sqlalchemy.sql.expression import and_, func
 
 
+LENGTH_WORD_ALLOWED = 5
+
+
 @dataclass
 class PostgresWordRepository(IWordsRepository):
 
     db: Session
 
     def get_active_word(self):
-        word = self.db.query(Words).filter(and_(func.length(Words.word) == 5, Words.is_active == True)).first()
+        word = (
+            self.db.query(Words)
+            .filter(
+                and_(
+                    func.length(Words.word) == LENGTH_WORD_ALLOWED,
+                    Words.is_active == True,
+                )
+            )
+            .first()
+        )
         return word
 
     def get_word(self, word):

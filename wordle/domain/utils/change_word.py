@@ -8,12 +8,16 @@ from sqlalchemy.sql.expression import and_, func
 
 
 db = SessionLocal()
-
+EXPIRATION_TIME = 300
 
 
 def desactive_word():
-    word = db.query(Words).filter(and_(func.length(Words.word) == 5, Words.is_active == True)).first()
+    word = (
+        db.query(Words)
+        .filter(and_(func.length(Words.word) == 5, Words.is_active == True))
+        .first()
+    )
     word.is_active = False
     db.commit()
     redis_client.flushall()
-    threading.Timer(300, desactive_word).start()
+    threading.Timer(EXPIRATION_TIME, desactive_word).start()

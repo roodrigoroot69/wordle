@@ -6,6 +6,7 @@ from wordle.domain.repositories.cache_interface import ICacheRepository
 
 EXPIRATION_TIME = 300
 
+
 @dataclass
 class RedisCacheRepository(ICacheRepository):
 
