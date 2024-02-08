@@ -20,7 +20,6 @@ services:
     container_name: wordle
     build:
       context: .
-    env_file: .env
     ports:
         - "8000:8000"
     volumes:
@@ -36,7 +35,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile_statistics
-    env_file: .env
     ports:
         - "9000:9000"
     volumes:

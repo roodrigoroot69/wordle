@@ -30,6 +30,12 @@ El usuario podra intentar adivinar cual es la palabra con 5 intentos.
 - Docker
 - Docker Compose
 
+**Nota:**
+Se está usando una base de datos en la nube para poder levantar este proyecto localmente y no perder tiempo
+con cargar datos, crear usuarios o algún registro para poder probar el sistema.
+
+**Segunda Nota:**
+Los valores que se estan dejando a la vista son una mala práctica, en esta ocasión se dejaron para efecto prácticos y no tener que estar compartiendo archivos .env o alguna otra cosa.
 
 ## Instrucciones para levantar el proyecto
 
