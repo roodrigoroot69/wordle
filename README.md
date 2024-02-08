@@ -11,14 +11,15 @@ El usuario podra intentar adivinar cual es la palabra con 5 intentos.
 
 ![Diagram](./docs/diagram.png)
 
-## Use cases to support:
+## Casos de uso que soporta:
 - Login
 - Registrar Usuario
 - Wordle (Necesita autenticación y enviar el token en los headers)
 - Cambiar la palabra cada 5 minutos
+- Obtener las palabras más acertadas
 
 
-## Stack's technology
+## Stack
 
 - Python
 - FastAPI
@@ -27,13 +28,13 @@ El usuario podra intentar adivinar cual es la palabra con 5 intentos.
 - Docker Compose
 
 
-## Instructions to install and run project
+## Instrucciones para levantar el proyecto
 
 - docker compose build
 - docker compose up
 
 
-## Documentation
+## Documentación
 Para ver la documentación de las APIS click [aquí](https://github.com/roodrigoroot69/wordle/blob/main/docs/api_documentation.md).
 
 
